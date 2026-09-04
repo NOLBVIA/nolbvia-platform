@@ -21,6 +21,24 @@ type CinematicSequenceProps = {
 type CachedFrame = { image: HTMLImageElement; lastUsed: number }
 const clamp = (value: number, min: number, max: number) => Math.min(max, Math.max(min, value))
 
+const portraitFocusAnchors = [
+  { frame: 1, x: 0.5 },
+  { frame: 75, x: 0.43 },
+  { frame: 150, x: 0.72 },
+  { frame: 225, x: 0.55 },
+  { frame: 300, x: 0.5 },
+] as const
+
+const getPortraitFocusX = (frame: number) => {
+  const upperIndex = portraitFocusAnchors.findIndex((anchor) => anchor.frame >= frame)
+  if (upperIndex <= 0) return portraitFocusAnchors[0].x
+  if (upperIndex === -1) return portraitFocusAnchors.at(-1)?.x ?? 0.5
+  const lower = portraitFocusAnchors[upperIndex - 1]
+  const upper = portraitFocusAnchors[upperIndex]
+  const progress = (frame - lower.frame) / (upper.frame - lower.frame)
+  return lower.x + (upper.x - lower.x) * progress
+}
+
 export function CinematicSequence({ className = '', enabled, frameCount, fullPage = true, scenes = [], srcForFrame }: CinematicSequenceProps) {
   const rootRef = useRef<HTMLDivElement>(null)
   const canvasRef = useRef<HTMLCanvasElement>(null)
@@ -28,6 +46,7 @@ export function CinematicSequence({ className = '', enabled, frameCount, fullPag
   const sceneLabelRef = useRef<HTMLSpanElement>(null)
   const cacheRef = useRef<Map<number, CachedFrame>>(new Map())
   const loadingRef = useRef<Set<number>>(new Set())
+  const inFlightImagesRef = useRef<Map<number, HTMLImageElement>>(new Map())
   const queueRef = useRef<number[]>([])
   const enqueueRef = useRef<(frames: number[]) => void>(() => undefined)
   const scheduleRenderRef = useRef<() => void>(() => undefined)
@@ -42,7 +61,7 @@ export function CinematicSequence({ className = '', enabled, frameCount, fullPag
   const [initializing, setInitializing] = useState(true)
   const [startupProgress, setStartupProgress] = useState(0)
 
-  const drawFrame = useCallback((image: HTMLImageElement) => {
+  const drawFrame = useCallback((image: HTMLImageElement, frame = currentFrameRef.current) => {
     const canvas = canvasRef.current
     if (!canvas || !image.naturalWidth || !image.naturalHeight) return
     const context = canvas.getContext('2d', { alpha: false })
@@ -50,7 +69,8 @@ export function CinematicSequence({ className = '', enabled, frameCount, fullPag
     const scale = Math.max(canvas.width / image.naturalWidth, canvas.height / image.naturalHeight)
     const renderedWidth = image.naturalWidth * scale
     const renderedHeight = image.naturalHeight * scale
-    const focalX = window.innerWidth < 700 ? 0.62 : 0.54
+    const portraitViewport = window.innerWidth <= 900 && window.innerHeight > window.innerWidth * 1.12
+    const focalX = portraitViewport ? getPortraitFocusX(frame) : window.innerWidth < 1100 ? 0.57 : 0.54
     context.imageSmoothingEnabled = true
     context.imageSmoothingQuality = 'high'
     context.drawImage(image, (canvas.width - renderedWidth) * focalX, (canvas.height - renderedHeight) * 0.5, renderedWidth, renderedHeight)
@@ -76,7 +96,7 @@ export function CinematicSequence({ className = '', enabled, frameCount, fullPag
     canvas.width = Math.round(window.innerWidth * pixelRatio)
     canvas.height = Math.round(window.innerHeight * pixelRatio)
     const image = getRenderableFrame(Math.round(currentFrameRef.current))
-    if (image) drawFrame(image)
+    if (image) drawFrame(image, currentFrameRef.current)
   }, [drawFrame, getRenderableFrame])
 
   useEffect(() => {
@@ -85,7 +105,8 @@ export function CinematicSequence({ className = '', enabled, frameCount, fullPag
     loadGenerationRef.current = generation
     let mounted = true
     const loadingFrames = loadingRef.current
-    const startupFrames = new Set([1, 2, 3, 4, 5, 6])
+    const inFlightImages = inFlightImagesRef.current
+    const startupFrames = new Set(reducedMotion ? [1] : [1, 2, 3, 4, 5, 6])
     const completedStartupFrames = new Set<number>()
     const cacheLimit = window.innerWidth < 700 ? 22 : 44
     const concurrency = window.innerWidth < 700 ? 3 : 5
@@ -116,6 +137,7 @@ export function CinematicSequence({ className = '', enabled, frameCount, fullPag
         loadingFrames.add(frame)
         const image = new Image()
         image.decoding = 'async'
+        inFlightImages.set(frame, image)
         image.src = srcForFrame(frame)
         image.onload = () => {
           if (generation !== loadGenerationRef.current) return
@@ -123,9 +145,10 @@ export function CinematicSequence({ className = '', enabled, frameCount, fullPag
             cacheRef.current.set(frame, { image, lastUsed: performance.now() })
             completeStartupFrame(frame)
             trimCache()
-            if (frame === 1) { setReady(true); resizeCanvas(); drawFrame(image) }
+            if (frame === 1) { setReady(true); resizeCanvas(); drawFrame(image, frame) }
             if (Math.abs(frame - targetFrameRef.current) <= 2) scheduleRenderRef.current()
           }
+          inFlightImages.delete(frame)
           loadingFrames.delete(frame)
           activeLoadsRef.current -= 1
           pumpQueue()
@@ -133,6 +156,7 @@ export function CinematicSequence({ className = '', enabled, frameCount, fullPag
         image.onerror = () => {
           if (generation !== loadGenerationRef.current) return
           if (mounted) completeStartupFrame(frame)
+          inFlightImages.delete(frame)
           loadingFrames.delete(frame)
           activeLoadsRef.current -= 1
           pumpQueue()
@@ -146,16 +170,22 @@ export function CinematicSequence({ className = '', enabled, frameCount, fullPag
       pumpQueue()
     }
 
-    enqueueRef.current([...startupFrames, ...scenes.flatMap((scene) => [scene.startFrame, scene.endFrame]), frameCount])
+    enqueueRef.current(reducedMotion ? [1] : [...startupFrames, ...scenes.flatMap((scene) => [scene.startFrame, scene.endFrame]), frameCount])
     return () => {
       mounted = false
       if (loadGenerationRef.current === generation) loadGenerationRef.current += 1
+      inFlightImages.forEach((image) => {
+        image.onload = null
+        image.onerror = null
+        image.src = ''
+      })
+      inFlightImages.clear()
       queueRef.current = []
       loadingFrames.clear()
       activeLoadsRef.current = 0
       enqueueRef.current = () => undefined
     }
-  }, [drawFrame, enabled, frameCount, resizeCanvas, scenes, srcForFrame])
+  }, [drawFrame, enabled, frameCount, reducedMotion, resizeCanvas, scenes, srcForFrame])
 
   useEffect(() => {
     if (!ready) return
@@ -164,7 +194,7 @@ export function CinematicSequence({ className = '', enabled, frameCount, fullPag
       const difference = targetFrameRef.current - currentFrameRef.current
       currentFrameRef.current = Math.abs(difference) < 0.35 ? targetFrameRef.current : currentFrameRef.current + difference * 0.24
       const image = getRenderableFrame(Math.round(currentFrameRef.current))
-      if (image) drawFrame(image)
+      if (image) drawFrame(image, currentFrameRef.current)
       if (Math.abs(targetFrameRef.current - currentFrameRef.current) >= 0.35) animationRef.current = requestAnimationFrame(renderStep)
     }
     scheduleRenderRef.current = () => { if (animationRef.current === null) animationRef.current = requestAnimationFrame(renderStep) }
@@ -199,7 +229,7 @@ export function CinematicSequence({ className = '', enabled, frameCount, fullPag
       enqueueRef.current(nearbyFrames)
       scheduleRenderRef.current()
       if (rootRef.current) { rootRef.current.dataset.scene = scene?.id ?? 'global'; rootRef.current.style.setProperty('--sequence-progress', String(progress)) }
-      if (frameLabelRef.current) frameLabelRef.current.textContent = `${String(frame).padStart(3, '0')} / ${frameCount}`
+      if (frameLabelRef.current) frameLabelRef.current.textContent = `${String(reducedMotion ? 1 : frame).padStart(3, '0')} / ${frameCount}`
       if (sceneLabelRef.current) sceneLabelRef.current.textContent = scene?.label ?? 'NOLBVIA CORE'
     }
 

@@ -27,6 +27,15 @@ export function Navbar() {
   }, [open])
 
   useEffect(() => {
+    const mobileNavigation = window.matchMedia('(max-width: 1100px)')
+    const closeAtDesktop = (event: MediaQueryListEvent) => {
+      if (!event.matches) setOpen(false)
+    }
+    mobileNavigation.addEventListener('change', closeAtDesktop)
+    return () => mobileNavigation.removeEventListener('change', closeAtDesktop)
+  }, [])
+
+  useEffect(() => {
     const targets = ['#top', ...navItems.map((item) => item.href)]
       .map((selector) => document.querySelector(selector))
       .filter((element): element is Element => Boolean(element))

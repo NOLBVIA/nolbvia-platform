@@ -14,7 +14,7 @@ export function Hero() {
 
         <h1 id="hero-title" data-reveal>
           BUILDING SYSTEMS FOR<br />
-          <span className="headline-accent">WHAT COMES NEXT.</span>
+          WHAT COMES <span className="headline-accent">NEXT.</span>
         </h1>
 
         <p className="hero-copy" data-reveal>
