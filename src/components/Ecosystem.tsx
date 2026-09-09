@@ -6,7 +6,8 @@ const divisions = [
     name: 'NOLBVIA Development',
     code: 'SYS-DEV-01',
     category: 'TECHNOLOGY DIVISION',
-    text: 'Software, applications and digital products designed as the current foundation of the ecosystem.',
+    text: 'Engineering digital systems, products and experiences.',
+    href: '/development',
     state: 'CURRENT FOCUS',
     focus: ['Software', 'Applications', 'Digital Products', 'Digital Experiences'],
   },
@@ -70,6 +71,11 @@ export function Ecosystem() {
                     <span key={tag} className="focus-pill">{tag}</span>
                   ))}
                 </div>
+                {division.code === 'SYS-DEV-01' && division.href === '/development' && (
+                  <a className="division-explore" href={division.href}>
+                    EXPLORE DEVELOPMENT <span aria-hidden="true">→</span>
+                  </a>
+                )}
               </div>
             </article>
           ))}

@@ -84,6 +84,7 @@ export function DevelopmentNavbar() {
               {item.label}
             </a>
           ))}
+          <a className="development-navbar__link" href="/" onClick={close}>CORPORATE</a>
           <a className="development-navbar__cta" href="/#contact" onClick={close}>START A PROJECT <span aria-hidden="true">↗</span></a>
         </div>
       </nav>

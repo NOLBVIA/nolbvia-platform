@@ -76,6 +76,9 @@ export function Navbar() {
               <span className="nav-item-text">{item.label}</span>
             </a>
           ))}
+          <a href="/development" onClick={close} className="nav-item">
+            <span className="nav-item-text">DEVELOPMENT</span>
+          </a>
           <a className="nav-cta-button" href="#ecosystem" onClick={close}>
             <span>ENTER ECOSYSTEM</span>
             <span className="cta-arrow">↗</span>
