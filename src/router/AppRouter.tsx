@@ -3,6 +3,7 @@ import { Navigate, Route, Routes } from 'react-router-dom'
 
 const CorporatePage = lazy(() => import('../App'))
 const DevelopmentPage = lazy(() => import('../pages/DevelopmentPage'))
+const ExplorationPage = lazy(() => import('../pages/ExplorationPage'))
 
 function RouteFallback({ label }: { label: string }) {
   return <div className="sr-only" role="status">{label}</div>
@@ -24,6 +25,14 @@ export function AppRouter() {
         element={
           <Suspense fallback={<RouteFallback label="Loading NOLBVIA Development" />}>
             <DevelopmentPage />
+          </Suspense>
+        }
+      />
+      <Route
+        path="/exploration"
+        element={
+          <Suspense fallback={<RouteFallback label="Loading NOLBVIA Exploration" />}>
+            <ExplorationPage />
           </Suspense>
         }
       />
