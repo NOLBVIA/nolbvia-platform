@@ -33,6 +33,8 @@ export const explorationFooter = {
     { label: 'WHY WE EXPLORE', href: '#mission' },
     { label: 'DOMAINS', href: '#domains' },
     { label: 'FRONTIERS', href: '#frontiers' },
+    { label: 'VISION', href: '#vision' },
+    { label: 'STATUS', href: '#status' },
   ],
 } as const
 
@@ -67,5 +69,33 @@ export const explorationFrontiers = {
     { number: '04', name: 'ROBOTIC EXPLORATION', description: 'Exploring machines designed to operate where humans cannot easily go.', status: 'EMERGING' },
     { number: '05', name: 'ADVANCED COMPUTING', description: 'Investigating computational systems that expand the limits of simulation, intelligence and discovery.', status: 'RESEARCHING' },
     { number: '06', name: 'HUMAN–MACHINE INTERACTION', description: 'Exploring new ways humans and intelligent systems can work together.', status: 'EMERGING' },
+  ],
+} as const
+
+export const explorationVision = {
+  eyebrow: '[ 06 // VISION ]',
+  title: 'FROM DIGITAL SYSTEMS TO PHYSICAL FRONTIERS.',
+  description: 'From software and digital systems toward increasingly physical and demanding frontiers.',
+  stages: ['DIGITAL SYSTEMS', 'ENGINEERING', 'SCIENCE', 'ADVANCED TECHNOLOGY', 'EXPLORATION', 'SPACE'],
+} as const
+
+export const explorationStatus = {
+  eyebrow: '[ 07 // STATUS ]',
+  title: 'EXPLORATION STATUS',
+  description: 'Exploration is currently a long-term direction within the NOLBVIA ecosystem.',
+  records: [
+    { label: 'PHASE', value: '01', detail: 'FOUNDATION' },
+    { label: 'STATUS', value: 'CONCEPTUAL' },
+    { label: 'FOCUS', value: 'RESEARCH · SCIENCE · TECHNOLOGY' },
+    { label: 'HORIZON', value: 'LONG-TERM' },
+  ],
+} as const
+
+export const explorationCTA = {
+  eyebrow: '[ 08 // CTA ]',
+  title: 'THE FRONTIER IS OPEN.',
+  links: [
+    { label: 'EXPLORE NOLBVIA', href: '/' },
+    { label: 'EXPLORE DEVELOPMENT', href: '/development/' },
   ],
 } as const
