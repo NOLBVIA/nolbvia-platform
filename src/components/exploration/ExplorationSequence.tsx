@@ -145,15 +145,17 @@ export function ExplorationSequence() {
   }, [reducedMotion])
 
   return (
+    <>
     <section ref={rootRef} className="exploration-sequence" aria-hidden="true">
       <div className="exploration-sequence__sticky" aria-hidden="true">
         <div className="exploration-sequence__visual">
           <div className="exploration-sequence__fallback">{content.brand}<span>{content.stages[4]}</span></div>
           <canvas ref={canvasRef} width={1280} height={720} />
         </div>
-        <div className="exploration-sequence__caption"><span>{content.eyebrow}</span><span ref={labelRef}>{content.stages[0]} / 001</span></div>
         <div className="exploration-sequence__progress"><i /></div>
       </div>
     </section>
+    <div className="exploration-sequence__caption" aria-hidden="true"><span>{content.eyebrow}</span><span ref={labelRef}>{content.stages[0]} / 001</span></div>
+    </>
   )
 }

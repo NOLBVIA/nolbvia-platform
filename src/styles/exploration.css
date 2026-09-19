@@ -42,7 +42,21 @@
   justify-content: space-between;
   gap: 24px;
 }
-.exploration-brand { font-size: 20px; font-weight: 700; letter-spacing: .16em; }
+.exploration-brand { min-width: 0; display: inline-flex; align-items: center; gap: .7rem; }
+.exploration-brand .brand-logo-container { min-width: 0; gap: .55rem; }
+.exploration-brand .brand-wordmark { font-size: .95rem; }
+.exploration-brand-division {
+  padding-left: .7rem;
+  border-left: 1px solid var(--line-highlight);
+  color: var(--champagne-gold);
+  font: .61rem/1 var(--font-tech);
+  letter-spacing: .14em;
+}
+@media (max-width: 380px) {
+  .exploration-brand { gap: .45rem; }
+  .exploration-brand .brand-wordmark { font-size: .86rem; letter-spacing: .1em; }
+  .exploration-brand-division { padding-left: .45rem; font-size: .54rem; letter-spacing: .1em; }
+}
 .exploration-navigation { display: flex; align-items: center; gap: clamp(20px, 2.5vw, 44px); }
 .exploration-navigation a {
   display: flex;
@@ -112,7 +126,10 @@
 }
 .exploration-sequence__fallback span { color: var(--champagne-gold); }
 .exploration-sequence__caption {
-  position: absolute;
+  position: fixed;
+  left: 0;
+  z-index: calc(var(--layer-content) + 1);
+  pointer-events: none;
   bottom: 8px;
   background: linear-gradient(transparent, rgba(3,8,17,.75));
   width: 100%;
