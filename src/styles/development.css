@@ -1223,6 +1223,13 @@
   }
 }
 
+@media (min-width: 1024px) and (max-width: 1100px) {
+  .development-page .development-navbar__links {
+    top: 76px;
+    max-height: calc(100svh - 76px);
+  }
+}
+
 @media (min-width: 1101px) {
   .development-page .development-navbar__inner {
     padding-top: 0.8rem;
@@ -1351,6 +1358,10 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  html:has(.development-page) {
+    scroll-behavior: auto;
+  }
+
   .development-page {
     scroll-behavior: auto;
   }
