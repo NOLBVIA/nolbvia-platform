@@ -21,6 +21,16 @@ const divisions = [
     state: 'FUTURE HORIZON',
     focus: ['Exploration', 'Science', 'Technology', 'Space'],
   },
+  {
+    number: '03',
+    name: 'NOLBVIA Intelligence',
+    code: 'COMP-INT-03',
+    category: 'COMPUTATIONAL LAYER',
+    text: 'Exploring data, computation, knowledge and intelligent systems.',
+    href: '/intelligence',
+    state: 'FOUNDATION',
+    focus: ['Artificial Intelligence', 'Data & Analytics', 'Computational Systems', 'Knowledge Systems', 'Automation'],
+  },
 ]
 
 export function Ecosystem() {
@@ -82,6 +92,11 @@ export function Ecosystem() {
                     EXPLORE EXPLORATION <span aria-hidden="true">→</span>
                   </a>
                 )}
+                {division.code === 'COMP-INT-03' && division.href === '/intelligence' && (
+                  <a className="division-explore" href={division.href}>
+                    EXPLORE INTELLIGENCE <span aria-hidden="true">→</span>
+                  </a>
+                )}
               </div>
             </article>
           ))}
@@ -89,8 +104,8 @@ export function Ecosystem() {
           <article className="division glass-card future">
             <div className="division-header-row">
               <div className="division-left">
-                <span className="division-number">03</span>
-                <span className="division-code">SPEC-FUT-03</span>
+                <span className="division-number">04</span>
+                <span className="division-code">SPEC-FUT-04</span>
               </div>
               <div className="division-meta">
                 <span className="division-state future-state">SPECULATIVE HORIZON</span>
