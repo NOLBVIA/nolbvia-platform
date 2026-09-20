@@ -17,6 +17,7 @@ const divisions = [
     code: 'AERO-EXP-02',
     category: 'FUTURE VISION',
     text: 'A longer-term direction connected to exploration, science, technology and eventually space.',
+    href: '/exploration',
     state: 'FUTURE HORIZON',
     focus: ['Exploration', 'Science', 'Technology', 'Space'],
   },
@@ -74,6 +75,11 @@ export function Ecosystem() {
                 {division.code === 'SYS-DEV-01' && division.href === '/development' && (
                   <a className="division-explore" href={division.href}>
                     EXPLORE DEVELOPMENT <span aria-hidden="true">→</span>
+                  </a>
+                )}
+                {division.code === 'AERO-EXP-02' && division.href === '/exploration' && (
+                  <a className="division-explore" href={division.href}>
+                    EXPLORE EXPLORATION <span aria-hidden="true">→</span>
                   </a>
                 )}
               </div>
