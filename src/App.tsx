@@ -10,4 +10,4 @@ import { CinematicSequence } from './components/CinematicSequence'
 import { cinematicScenes, cinematicSequence } from './content/site'
 import { useReveal } from './hooks/useReveal'
 
-export default function App() { useReveal(); return <><CinematicSequence className="site-cinematic-background" fullPage scenes={[...cinematicScenes]} {...cinematicSequence} /><Navbar /><main><Hero /><Ecosystem /><BuildSection /><Vision /><Projects /><Contact /></main><Footer /></> }
+export default function App() { useReveal(); return <><CinematicSequence className="site-cinematic-background" fullPage scenes={[...cinematicScenes]} {...cinematicSequence} /><a className="skip-link" href="#corporate-main">SKIP TO CONTENT</a><Navbar /><main id="corporate-main" tabIndex={-1}><Hero /><Ecosystem /><BuildSection /><Vision /><Projects /><Contact /></main><Footer /></> }

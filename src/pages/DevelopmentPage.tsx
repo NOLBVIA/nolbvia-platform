@@ -51,7 +51,7 @@ export default function DevelopmentPage() {
       <DevelopmentSequence />
       <a className="development-skip-link" href="#development-main">SKIP TO CONTENT</a>
       <DevelopmentNavbar />
-      <main id="development-main">
+      <main id="development-main" tabIndex={-1}>
         <DevelopmentHero />
         <DevelopmentOverview />
         <DevelopmentProjectCatalog />
