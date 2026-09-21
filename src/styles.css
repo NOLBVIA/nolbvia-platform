@@ -2559,6 +2559,10 @@ button {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
   .cinematic-hud-scanlines { display: none; }
   .sequence-loader { display: none; }
 }
