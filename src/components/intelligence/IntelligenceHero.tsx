@@ -9,7 +9,7 @@ export function IntelligenceHero() {
           <h1 id="intelligence-title">{hero.headline}</h1>
           <p className="intelligence-hero__supporting">{hero.supporting}</p>
           <a className="intelligence-scroll-cue" href="#purpose">
-            CONTINUE <span aria-hidden="true">↓</span>
+            EXPLORAR INTELLIGENCE <span aria-hidden="true">↓</span>
           </a>
         </div>
       </div>

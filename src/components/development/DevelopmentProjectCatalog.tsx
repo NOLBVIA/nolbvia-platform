@@ -6,14 +6,14 @@ export function DevelopmentProjectCatalog() {
     <section id="projects" className="development-section development-projects" aria-labelledby="development-projects-title">
       <div className="development-section__header development-section__header--split" data-reveal>
         <div>
-          <p className="development-section__index">[ 02 / PROJECT REGISTER ]</p>
-          <h2 id="development-projects-title">PROJECTS</h2>
+          <p className="development-section__index">[ 03 / PORTAFOLIO TÉCNICO ]</p>
+          <h2 id="development-projects-title">SISTEMAS EN DESARROLLO</h2>
         </div>
-        <p>Selected systems currently forming the NOLBVIA development portfolio.</p>
+        <p>Plataformas e iniciativas que demuestran la capacidad técnica y el enfoque de ingeniería de NOLBVIA.</p>
       </div>
       <div className="development-project-register">
         <div className="development-project-register__legend" aria-hidden="true">
-          <span>IDENTIFIER</span><span>PROJECT / CATEGORY</span><span>STATUS / DESCRIPTION</span>
+          <span>IDENTIFICADOR</span><span>PROYECTO / ENFOQUE</span><span>ESTADO / DESCRIPCIÓN</span>
         </div>
         {developmentProjects.map((project) => <DevelopmentProjectEntry project={project} key={project.id} />)}
       </div>

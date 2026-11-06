@@ -1,48 +1,32 @@
-import { projects } from '../content/site'
+import { engineeringMethodology } from '../content/site'
 import { SectionHeader } from './SectionHeader'
 
 export function Projects() {
   return (
-    <section id="projects" className="projects section">
+    <section id="methodology" className="projects section">
       <SectionHeader
-        eyebrow="[ 03 // PROJECT ARCHIVE ]"
-        title="Future case studies, ready for real work."
+        eyebrow="[ 03 // METODOLOGÍA & PROCESO ]"
+        title="Un método estructurado desde el diagnóstico hasta la entrega."
       >
-        <p>Clearly identified placeholders prepared to become confirmed NOLBVIA project stories.</p>
+        <p>
+          Abordamos cada desafío tecnológico con un proceso predecible y riguroso que minimiza riesgos, asegura código limpio y maximiza la velocidad de ejecución.
+        </p>
       </SectionHeader>
 
-      <div className="project-grid">
-        {projects.map((project, index) => (
-          <article className={`project-card glass-card project-${project.accent}`} data-reveal key={project.name}>
-            <div className="project-header">
-              <div className="project-id-group">
-                <span className="project-index">0{index + 1}</span>
-                <span className="project-code">{project.code}</span>
-              </div>
-              <span className="project-status-badge">{project.status}</span>
+      <div className="methodology-grid">
+        {engineeringMethodology.map((item) => (
+          <article className="methodology-card glass-panel" data-reveal key={item.step}>
+            <div className="methodology-step-badge">
+              <span className="step-num">{item.step}</span>
+              <span className="step-tag">{item.subtitle}</span>
             </div>
 
-            <div className="project-visual-hud" aria-hidden="true">
-              <div className="hud-grid-lines" />
-              <div className="hud-orbital-ring" />
-              <div className="hud-core-marker" />
-              <div className="hud-metric-readout">
-                <span className="hud-label">RECORD:</span>
-                <span className="hud-val">{project.note}</span>
-              </div>
-            </div>
+            <h3 className="methodology-title">{item.title}</h3>
+            <p className="methodology-desc">{item.description}</p>
 
-            <div className="project-body">
-              <span className="project-category">{project.category}</span>
-              <h3 className="project-title">{project.name}</h3>
-              <p className="project-desc">{project.description}</p>
-              
-              <div className="project-footer">
-                <span className="project-link">
-                  <span>PROJECT PLACEHOLDER</span>
-                  <span className="arrow-glyph">↗</span>
-                </span>
-              </div>
+            <div className="methodology-outcome">
+              <span className="outcome-label">Entregable clave:</span>
+              <p className="outcome-text">{item.outcome}</p>
             </div>
           </article>
         ))}

@@ -7,7 +7,28 @@ import { Navbar } from './components/Navbar'
 import { Projects } from './components/Projects'
 import { Vision } from './components/Vision'
 import { CinematicSequence } from './components/CinematicSequence'
-import { cinematicScenes, cinematicSequence } from './content/site'
+import { cinematicScenes, cinematicSequence, corporateMetadata } from './content/site'
+import { useDocumentMetadata } from './hooks/useDocumentMetadata'
 import { useReveal } from './hooks/useReveal'
 
-export default function App() { useReveal(); return <><CinematicSequence className="site-cinematic-background" fullPage scenes={[...cinematicScenes]} {...cinematicSequence} /><a className="skip-link" href="#corporate-main">SKIP TO CONTENT</a><Navbar /><main id="corporate-main" tabIndex={-1}><Hero /><Ecosystem /><BuildSection /><Vision /><Projects /><Contact /></main><Footer /></> }
+export default function App() {
+  useReveal()
+  useDocumentMetadata(corporateMetadata)
+
+  return (
+    <>
+      <CinematicSequence className="site-cinematic-background" fullPage scenes={[...cinematicScenes]} {...cinematicSequence} />
+      <a className="skip-link" href="#corporate-main">SALTAR AL CONTENIDO</a>
+      <Navbar />
+      <main id="corporate-main" tabIndex={-1}>
+        <Hero />
+        <Ecosystem />
+        <BuildSection />
+        <Projects />
+        <Vision />
+        <Contact />
+      </main>
+      <Footer />
+    </>
+  )
+}

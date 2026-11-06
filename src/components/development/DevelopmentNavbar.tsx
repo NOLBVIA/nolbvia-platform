@@ -53,7 +53,9 @@ export function DevelopmentNavbar() {
 
   return (
     <header className={`development-navbar ${scrolled ? 'is-scrolled' : ''}`}>
-      <nav className="development-navbar__inner" aria-label="NOLBVIA Development navigation">
+      <nav className="development-navbar__inner" aria-label="NOLBVIA Development navigation" onBlur={event => {
+        if (!event.currentTarget.contains(event.relatedTarget)) setOpen(false)
+      }}>
         <a className="development-navbar__brand" href="/development" aria-label="NOLBVIA Development home" onClick={close}>
           <BrandLogo size="sm" showDescriptor={false} />
           <span className="development-navbar__division">DEVELOPMENT</span>
@@ -85,7 +87,7 @@ export function DevelopmentNavbar() {
             </a>
           ))}
           <a className="development-navbar__link" href="/" onClick={close}>CORPORATE</a>
-          <a className="development-navbar__cta" href="/#contact" onClick={close}>START A PROJECT <span aria-hidden="true">↗</span></a>
+          <a className="development-navbar__cta" href="/#contact" onClick={close}>HABLEMOS DE TU PROYECTO <span aria-hidden="true">↗</span></a>
         </div>
       </nav>
     </header>

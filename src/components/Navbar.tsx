@@ -53,7 +53,9 @@ export function Navbar() {
 
   return (
     <header className={`nav-wrap ${scrolled ? 'nav-scrolled' : ''}`}>
-      <nav className="nav" aria-label="Main navigation">
+      <nav className="nav" aria-label="Main navigation" onBlur={event => {
+        if (!event.currentTarget.contains(event.relatedTarget)) setOpen(false)
+      }}>
         <a href="#top" className="brand-link" onClick={close} aria-label="NOLBVIA Home">
           <BrandLogo size="md" />
         </a>
@@ -79,8 +81,8 @@ export function Navbar() {
           <a href="/development" onClick={close} className="nav-item">
             <span className="nav-item-text">DEVELOPMENT</span>
           </a>
-          <a className="nav-cta-button" href="#ecosystem" onClick={close}>
-            <span>ENTER ECOSYSTEM</span>
+          <a className="nav-cta-button" href="#contact" onClick={close}>
+            <span>INICIAR PROYECTO</span>
             <span className="cta-arrow">↗</span>
           </a>
         </div>

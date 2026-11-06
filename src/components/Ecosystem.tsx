@@ -1,128 +1,165 @@
+import { BrandLogo } from './BrandLogo'
+import { ecosystemDivisions, type EcosystemDivision } from '../content/site'
 import { SectionHeader } from './SectionHeader'
 
-const divisions = [
-  {
-    number: '01',
-    name: 'NOLBVIA Development',
-    code: 'SYS-DEV-01',
-    category: 'TECHNOLOGY DIVISION',
-    text: 'Engineering digital systems, products and experiences.',
-    href: '/development',
-    state: 'CURRENT FOCUS',
-    focus: ['Software', 'Applications', 'Digital Products', 'Digital Experiences'],
-  },
-  {
-    number: '02',
-    name: 'NOLBVIA Exploration',
-    code: 'AERO-EXP-02',
-    category: 'FUTURE VISION',
-    text: 'A longer-term direction connected to exploration, science, technology and eventually space.',
-    href: '/exploration',
-    state: 'FUTURE HORIZON',
-    focus: ['Exploration', 'Science', 'Technology', 'Space'],
-  },
-  {
-    number: '03',
-    name: 'NOLBVIA Intelligence',
-    code: 'COMP-INT-03',
-    category: 'COMPUTATIONAL LAYER',
-    text: 'Exploring data, computation, knowledge and intelligent systems.',
-    href: '/intelligence',
-    state: 'FOUNDATION',
-    focus: ['Artificial Intelligence', 'Data & Analytics', 'Computational Systems', 'Knowledge Systems', 'Automation'],
-  },
-]
+function DivisionIcon({ type, color }: { type: EcosystemDivision['iconType']; color: string }) {
+  switch (type) {
+    case 'code-bracket':
+      return (
+        <svg viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" className="division-svg-icon" aria-hidden="true">
+          <polyline points="16 18 22 12 16 6" />
+          <polyline points="8 6 2 12 8 18" />
+          <line x1="14" y1="4" x2="10" y2="20" />
+        </svg>
+      )
+    case 'orbital-telescope':
+      return (
+        <svg viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" className="division-svg-icon" aria-hidden="true">
+          <circle cx="12" cy="12" r="9" strokeDasharray="3 3" />
+          <circle cx="12" cy="12" r="3" />
+          <line x1="12" y1="1" x2="12" y2="5" />
+          <line x1="12" y1="19" x2="12" y2="23" />
+          <line x1="1" y1="12" x2="5" y2="12" />
+          <line x1="19" y1="12" x2="23" y2="12" />
+        </svg>
+      )
+    case 'neural-network':
+      return (
+        <svg viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" className="division-svg-icon" aria-hidden="true">
+          <circle cx="5" cy="6" r="2.5" />
+          <circle cx="19" cy="6" r="2.5" />
+          <circle cx="12" cy="12" r="3" />
+          <circle cx="5" cy="18" r="2.5" />
+          <circle cx="19" cy="18" r="2.5" />
+          <line x1="7.2" y1="7.2" x2="9.8" y2="10.2" />
+          <line x1="16.8" y1="7.2" x2="14.2" y2="10.2" />
+          <line x1="7.2" y1="16.8" x2="9.8" y2="13.8" />
+          <line x1="16.8" y1="16.8" x2="14.2" y2="13.8" />
+        </svg>
+      )
+    case 'modular-cube':
+      return (
+        <svg viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" className="division-svg-icon" aria-hidden="true">
+          <polygon points="12 2 2 7 12 12 22 7 12 2" />
+          <polyline points="2 17 12 22 22 17" />
+          <polyline points="2 12 12 17 22 12" />
+        </svg>
+      )
+  }
+}
 
 export function Ecosystem() {
   return (
     <section id="ecosystem" className="ecosystem section">
       <SectionHeader
-        eyebrow="[ 01 // ARCHITECTURE ]"
-        title="One unified ecosystem. Boundless frontiers."
+        eyebrow="[ 01 // ARQUITECTURA DEL ECOSISTEMA ]"
+        title="Un ecosistema tecnológico diseñado para crear y evolucionar."
       >
         <p>
-          NOLBVIA is designed as an evolving system rather than a single product, with room for new disciplines as the brand grows.
+          NOLBVIA se estructura en divisiones especializadas que integran desarrollo comercial en el presente, inteligencia computacional aplicada y exploración científica para el futuro.
         </p>
       </SectionHeader>
 
-      <div id="divisions" className="ecosystem-map" data-reveal>
-        {/* Central Ecosystem Core Anchor */}
-        <div className="ecosystem-core glass-panel">
-          <div className="core-orbital-system" aria-hidden="true">
-            <span className="core-ring core-ring-1" />
-            <span className="core-ring core-ring-2" />
-            <span className="core-orbit-node" />
+      <div id="divisions" className="ecosystem-architecture" data-reveal>
+        {/* Central Institutional Nexus */}
+        <div className="ecosystem-nexus glass-panel">
+          <div className="nexus-aurora" aria-hidden="true" />
+
+          <div className="nexus-emblem-core">
+            <BrandLogo size="lg" showDescriptor={false} />
+            <div className="nexus-orbital-aura" aria-hidden="true">
+              <span className="aura-ring ring-1" />
+              <span className="aura-ring ring-2" />
+              <span className="aura-beacon" />
+            </div>
           </div>
-          <span className="core-eyebrow">ECOSYSTEM CORE</span>
-          <h3 className="core-title">NOLBVIA</h3>
-          <span className="core-sub">EMERGING TECHNOLOGY ECOSYSTEM</span>
+
+          <div className="nexus-copy">
+            <span className="nexus-eyebrow">NÚCLEO INSTITUCIONAL</span>
+            <h3 className="nexus-title">NOLBVIA</h3>
+            <p className="nexus-subtitle">ECOSISTEMA TECNOLÓGICO MULTIDISCIPLINARIO</p>
+          </div>
+
+          <div className="nexus-structural-framework">
+            <div className="framework-node">
+              <span className="node-pip" />
+              <span className="node-text">ARQUITECTURA UNIFICADA</span>
+            </div>
+            <div className="framework-divider" aria-hidden="true" />
+            <div className="framework-node">
+              <span className="node-pip" />
+              <span className="node-text">GOBERNANZA COMPARTIDA</span>
+            </div>
+            <div className="framework-divider" aria-hidden="true" />
+            <div className="framework-node">
+              <span className="node-pip" />
+              <span className="node-text">EXPANSIÓN MODULAR</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Structural Connection Matrix */}
+        <div className="ecosystem-connective-spine" aria-hidden="true">
+          <span className="spine-hub" />
+          <div className="spine-branch branch-dev" />
+          <div className="spine-branch branch-exp" />
+          <div className="spine-branch branch-int" />
+          <div className="spine-branch branch-fut" />
         </div>
 
         {/* Divisions Cards */}
-        <div className="division-list">
-          {divisions.map((division) => (
-            <article className="division glass-card" key={division.name}>
-              <div className="division-header-row">
-                <div className="division-left">
-                  <span className="division-number">{division.number}</span>
-                  <span className="division-code">{division.code}</span>
+        <div className="division-grid">
+          {ecosystemDivisions.map((division) => (
+            <article
+              className={`division-card glass-card theme-${division.themeKey} ${division.isFuture ? 'is-future' : ''}`}
+              key={division.name}
+              style={{ '--division-theme-accent': division.accentColor } as React.CSSProperties}
+            >
+              <div className="division-card__header">
+                <div className="division-card__identity">
+                  <span className="division-card__number">{division.number}</span>
+                  <div className="division-card__titles">
+                    <span className="division-card__category">{division.category}</span>
+                    <h3 className="division-card__name">{division.name}</h3>
+                  </div>
                 </div>
-                <div className="division-meta">
-                  <span className="division-pulse" />
-                  <span className="division-state">{division.state}</span>
+
+                <div className="division-card__badge-wrap">
+                  <div className="division-icon-badge" style={{ borderColor: division.accentColor }}>
+                    <DivisionIcon type={division.iconType} color={division.accentColor} />
+                  </div>
+                  <span className="division-status-pill">{division.badge}</span>
                 </div>
               </div>
 
-              <div className="division-info">
-                <span className="division-category-tag">{division.category}</span>
-                <h3>{division.name}</h3>
-                <p>{division.text}</p>
-                <div className="division-focus-tags">
-                  {division.focus.map((tag) => (
-                    <span key={tag} className="focus-pill">{tag}</span>
-                  ))}
+              <div className="division-card__body">
+                <p className="division-card__desc">{division.text}</p>
+
+                <div className="division-card__highlights">
+                  <span className="highlights-label">Capacidades &amp; Áreas:</span>
+                  <div className="highlights-pills">
+                    {division.highlights.map((tag) => (
+                      <span key={tag} className="highlight-tag">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
                 </div>
-                {division.code === 'SYS-DEV-01' && division.href === '/development' && (
-                  <a className="division-explore" href={division.href}>
-                    EXPLORE DEVELOPMENT <span aria-hidden="true">→</span>
+
+                {division.href.startsWith('/') ? (
+                  <a className="division-card__cta" href={division.href}>
+                    <span>{division.linkText}</span>
+                    <span className="cta-arrow" aria-hidden="true">→</span>
                   </a>
-                )}
-                {division.code === 'AERO-EXP-02' && division.href === '/exploration' && (
-                  <a className="division-explore" href={division.href}>
-                    EXPLORE EXPLORATION <span aria-hidden="true">→</span>
-                  </a>
-                )}
-                {division.code === 'COMP-INT-03' && division.href === '/intelligence' && (
-                  <a className="division-explore" href={division.href}>
-                    EXPLORE INTELLIGENCE <span aria-hidden="true">→</span>
-                  </a>
+                ) : (
+                  <div className="division-card__cta is-static">
+                    <span>{division.linkText}</span>
+                    <span className="static-indicator" aria-hidden="true">✦</span>
+                  </div>
                 )}
               </div>
             </article>
           ))}
-
-          <article className="division glass-card future">
-            <div className="division-header-row">
-              <div className="division-left">
-                <span className="division-number">04</span>
-                <span className="division-code">SPEC-FUT-04</span>
-              </div>
-              <div className="division-meta">
-                <span className="division-state future-state">SPECULATIVE HORIZON</span>
-              </div>
-            </div>
-
-            <div className="division-info">
-              <span className="division-category-tag">FUTURE INITIATIVE</span>
-              <h3>Future Divisions</h3>
-              <p>Open architecture reserved for future possibilities that have not yet been defined or announced.</p>
-              <div className="division-focus-tags">
-                <span className="focus-pill">Future Technology</span>
-                <span className="focus-pill">New Disciplines</span>
-                <span className="focus-pill">Open Possibilities</span>
-              </div>
-            </div>
-          </article>
         </div>
       </div>
     </section>

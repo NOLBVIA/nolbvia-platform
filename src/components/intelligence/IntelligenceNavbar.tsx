@@ -53,8 +53,10 @@ export function IntelligenceNavbar() {
 
   return (
     <header className={`intelligence-navbar${scrolled ? ' is-scrolled' : ''}`}>
-      <nav className="intelligence-navbar__inner" aria-label="NOLBVIA Intelligence navigation">
-        <a className="intelligence-navbar__brand" href="/" aria-label="NOLBVIA home" onClick={close}>
+      <nav className="intelligence-navbar__inner" aria-label="NOLBVIA Intelligence navigation" onBlur={event => {
+        if (!event.currentTarget.contains(event.relatedTarget)) setOpen(false)
+      }}>
+        <a className="intelligence-navbar__brand" href="/intelligence" aria-label="NOLBVIA Intelligence home" onClick={close}>
           <BrandLogo size="sm" showDescriptor={false} />
           <span>INTELLIGENCE</span>
         </a>
@@ -81,8 +83,8 @@ export function IntelligenceNavbar() {
               {item.label}
             </a>
           ))}
-          <a className="intelligence-navbar__cta" href="/#ecosystem" onClick={close}>
-            ENTER ECOSYSTEM <span aria-hidden="true">↗</span>
+          <a className="intelligence-navbar__cta" href="/#contact" onClick={close}>
+            CONTACTO <span aria-hidden="true">↗</span>
           </a>
         </div>
       </nav>

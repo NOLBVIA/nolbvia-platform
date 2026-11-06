@@ -5,12 +5,12 @@ type DevelopmentProjectEntryProps = {
 }
 
 export function DevelopmentProjectEntry({ project }: DevelopmentProjectEntryProps) {
-  const active = project.status === 'ACTIVE — IN PRODUCTION'
+  const active = project.status === 'ACTIVO — EN PRODUCCIÓN'
 
   return (
     <article className="development-project-entry" data-reveal>
       <div className="development-project-entry__index">
-        <span>PROJECT</span>
+        <span>PROYECTO</span>
         <strong>{project.id}</strong>
       </div>
       <div className="development-project-entry__identity">
@@ -22,7 +22,7 @@ export function DevelopmentProjectEntry({ project }: DevelopmentProjectEntryProp
           <i aria-hidden="true" />
           <span>{project.status}</span>
         </div>
-        {project.audience && <p className="development-project-entry__audience"><span>TARGET</span>{project.audience}</p>}
+        {project.audience && <p className="development-project-entry__audience"><span>ALCANCE</span>{project.audience}</p>}
         <p className="development-project-entry__description">{project.description}</p>
       </div>
     </article>

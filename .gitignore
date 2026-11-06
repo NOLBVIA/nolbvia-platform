@@ -2,3 +2,7 @@ node_modules/
 dist/
 *.tsbuildinfo
 .vite/
+NOLBVIA_Centro_Editorial_2026-2027/
+scripts/build_editorial_system.py
+scripts/generate_all_editorial_assets.py
+

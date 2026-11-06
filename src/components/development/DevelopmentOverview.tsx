@@ -4,9 +4,9 @@ export function DevelopmentOverview() {
   return (
     <section id="overview" className="development-section development-overview" aria-labelledby="development-overview-title">
       <div className="development-section__header" data-reveal>
-        <p className="development-section__index">[ 01 / DEVELOPMENT CORE ]</p>
-        <h2 id="development-overview-title">DEVELOPMENT CORE</h2>
-        <p>Four areas define the current direction of NOLBVIA Development.</p>
+        <p className="development-section__index">[ 01 / QUÉ DESARROLLAMOS ]</p>
+        <h2 id="development-overview-title">SOLUCIONES DIGITALES CONCRETAS</h2>
+        <p>Cuatro ejes técnicos definen el alcance y las capacidades operativas de NOLBVIA Development.</p>
       </div>
 
       <div className="development-core-grid">

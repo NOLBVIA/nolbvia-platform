@@ -27,7 +27,7 @@ export function BrandLogo({
       <div className="brand-typography">
         <span className="brand-wordmark">NOLBVIA</span>
         {showDescriptor && (
-          <span className="brand-descriptor">SYSTEMS & AEROSPACE ENGINEERING</span>
+          <span className="brand-descriptor">INGENIERÍA, TECNOLOGÍA Y DESARROLLO DIGITAL</span>
         )}
       </div>
     </div>

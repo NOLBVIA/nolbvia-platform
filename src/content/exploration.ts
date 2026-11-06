@@ -15,6 +15,7 @@ export const explorationNavigation = [
   { label: 'CORPORATE', href: '/' },
   { label: 'DEVELOPMENT', href: '/development' },
   { label: 'EXPLORATION', href: '/exploration' },
+  { label: 'INTELLIGENCE', href: '/intelligence' },
 ] as const
 
 export const explorationMetadata = {
@@ -96,6 +97,7 @@ export const explorationCTA = {
   title: 'THE FRONTIER IS OPEN.',
   links: [
     { label: 'EXPLORE NOLBVIA', href: '/' },
-    { label: 'EXPLORE DEVELOPMENT', href: '/development/' },
+    { label: 'EXPLORE DEVELOPMENT', href: '/development' },
+    { label: 'EXPLORE INTELLIGENCE', href: '/intelligence' },
   ],
 } as const

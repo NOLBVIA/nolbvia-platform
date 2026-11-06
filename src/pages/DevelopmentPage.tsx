@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { DevelopmentBuildLog } from '../components/development/DevelopmentBuildLog'
 import { DevelopmentCapabilities } from '../components/development/DevelopmentCapabilities'
 import { DevelopmentCTA } from '../components/development/DevelopmentCTA'
 import { DevelopmentFooter } from '../components/development/DevelopmentFooter'
@@ -6,8 +6,10 @@ import { DevelopmentHero } from '../components/development/DevelopmentHero'
 import { DevelopmentNavbar } from '../components/development/DevelopmentNavbar'
 import { DevelopmentOverview } from '../components/development/DevelopmentOverview'
 import { DevelopmentProcess } from '../components/development/DevelopmentProcess'
-import { DevelopmentProjectCatalog } from '../components/development/DevelopmentProjectCatalog'
-import { DevelopmentStatus } from '../components/development/DevelopmentStatus'
+import { DevelopmentPrinciples } from '../components/development/DevelopmentPrinciples'
+import { DevelopmentProductCatalog } from '../components/development/DevelopmentProductCatalog'
+import { DevelopmentTechFeed } from '../components/development/DevelopmentTechFeed'
+import { DevelopmentSolutions } from '../components/development/DevelopmentSolutions'
 import { DevelopmentSequence } from '../components/development/DevelopmentSequence'
 import { developmentMetadata } from '../content/development'
 import { useDocumentMetadata } from '../hooks/useDocumentMetadata'
@@ -18,46 +20,21 @@ export default function DevelopmentPage() {
   useReveal()
   useDocumentMetadata(developmentMetadata)
 
-  useEffect(() => {
-    let frame = 0
-    let cancelled = false
-
-    const scrollToLocation = () => {
-      window.cancelAnimationFrame(frame)
-      frame = window.requestAnimationFrame(() => {
-        if (cancelled) return
-
-        const hash = window.location.hash.slice(1)
-        if (hash) {
-          document.getElementById(decodeURIComponent(hash))?.scrollIntoView({ block: 'start' })
-          return
-        }
-
-        window.scrollTo({ top: 0, behavior: 'instant' })
-      })
-    }
-
-    scrollToLocation()
-    void document.fonts.ready.then(scrollToLocation)
-
-    return () => {
-      cancelled = true
-      window.cancelAnimationFrame(frame)
-    }
-  }, [])
-
   return (
     <div className="development-page">
       <DevelopmentSequence />
-      <a className="development-skip-link" href="#development-main">SKIP TO CONTENT</a>
+      <a className="development-skip-link" href="#development-main">SALTAR AL CONTENIDO</a>
       <DevelopmentNavbar />
       <main id="development-main" tabIndex={-1}>
         <DevelopmentHero />
         <DevelopmentOverview />
-        <DevelopmentProjectCatalog />
-        <DevelopmentCapabilities />
+        <DevelopmentSolutions />
+        <DevelopmentProductCatalog />
+        <DevelopmentBuildLog />
+        <DevelopmentTechFeed />
         <DevelopmentProcess />
-        <DevelopmentStatus />
+        <DevelopmentPrinciples />
+        <DevelopmentCapabilities />
         <DevelopmentCTA />
       </main>
       <DevelopmentFooter />
